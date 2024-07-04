@@ -5,7 +5,17 @@
   "projects": {
     "FRONT-END": {
       "projectType": "application",
-      "schematics": {},
+      "schematics": {
+        "@schematics/angular:component": {
+          "standalone": false
+        },
+        "@schematics/angular:directive": {
+          "standalone": false
+        },
+        "@schematics/angular:pipe": {
+          "standalone": false
+        }
+      },
       "root": "",
       "sourceRoot": "src",
       "prefix": "app",
@@ -29,12 +39,7 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": [],
-            "server": "src/main.server.ts",
-            "prerender": true,
-            "ssr": {
-              "entry": "server.ts"
-            }
+            "scripts": []
           },
           "configurations": {
             "production": {
@@ -99,6 +104,6 @@
     }
   },
   "cli": {
-    "analytics": "4b0ad698-c12f-4220-b0bb-64ee31bea2c9"
+    "analytics": "379bbcf0-d2ca-4b3e-a817-c061f7b71947"
   }
 }
