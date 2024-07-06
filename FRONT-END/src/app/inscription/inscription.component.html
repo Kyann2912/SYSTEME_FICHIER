@@ -17,30 +17,29 @@
             <div>
                 <h3>INSCRIPTION</h3> 
             </div>
-            <form action="#" name="formulaire">
+            <form (ngSubmit)="onSubmit()">
                 <div class="B">
                     Nom  <br>
-                    <input type="text" id="a" value="" required=""><br>
+                    <input type="text" name="nom"  value="" required=""><br>
                     <br>
                     Prénom  <br>
-                    <input type="text" id="b" value="" required=""><br>
+                    <input type="text" name="prenom" value="" required=""><br>
                     <br>
                     Email  <br>
-                    <input type="mail" id="c" value="" required=""><br>
+                    <input type="mail" name="email" value="" required=""><br>
                     <br>
                     Adresse  <br>
-                    <input type="text" id="d" value="" class="Date" required=""> <br>
+                    <input type="text" name="adresse" value="" class="Date" required=""> <br>
                     <br>
                     Contact  <br>
-                    <input type="text" id="e" value="" required=""><br> 
+                    <input type="text" name="contact" value="" required=""><br> 
                     <br>
                     Mot de Passe  <br>
-                    <input type="password" id="f" value="" required=""> <br>
+                    <input type="password" name="mot_passe" value="" required=""> <br>
                 </div><br>
                 <div class="C">
                     <input type="submit" onclick="Yann()" value="Envoyer">
                 </div>
-
             </form>
         </div>
 
