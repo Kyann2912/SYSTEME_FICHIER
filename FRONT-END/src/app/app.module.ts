@@ -8,13 +8,17 @@ import { InscriptionComponent } from './inscription/inscription.component';
 import { ConnexionComponent } from './connexion/connexion.component';
 // import { HttpClientModule } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
+import { TableauComponent } from './tableau/tableau.component';
+import { FichierComponent } from './fichier/fichier.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     InscriptionComponent,
-    ConnexionComponent
+    ConnexionComponent,
+    TableauComponent,
+    FichierComponent
   ],
   imports: [
     BrowserModule,
