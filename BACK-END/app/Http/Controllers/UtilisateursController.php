@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Utilisateurs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class UtilisateursController extends Controller
 {
@@ -98,4 +99,28 @@ class UtilisateursController extends Controller
     {
         //
     }
+
+    public function login(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email|unique:utilisateurs,email|max:255',
+            'mot_passe' => 'required|string|min:8'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 401);
+        }
+
+        $credentials = request(['email', 'mot_passe']);
+
+        if (!Auth::attempt($credentials)) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
+
+        $user = $request->user();
+        $token = $user->createToken('MyApp')->plainTextToken;
+
+        return response()->json(['token' => $token], 200);
+    }
+
 }

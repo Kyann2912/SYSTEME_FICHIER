@@ -9,7 +9,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { TableauComponent } from './tableau/tableau.component';
 import { FichierComponent } from './fichier/fichier.component';
 import { UtilisateursComponent } from './utilisateurs/utilisateurs.component';
-import { FormsModule } from '@angular/forms'; // Importez FormsModule ici
+import { FormsModule } from '@angular/forms';
+import { ListeComponent } from './liste/liste.component'; // Importez FormsModule ici
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { FormsModule } from '@angular/forms'; // Importez FormsModule ici
     TableauComponent,
     FichierComponent,
     UtilisateursComponent,
+    ListeComponent,
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,8 @@ import { ConnexionComponent } from './connexion/connexion.component';
 import { TableauComponent } from './tableau/tableau.component';
 import { FichierComponent } from './fichier/fichier.component';
 import { UtilisateursComponent } from './utilisateurs/utilisateurs.component';
+import { ListeComponent } from './liste/liste.component';
+
 
 
 
@@ -19,6 +21,8 @@ const routes: Routes = [
   { path: 'tableau', component: TableauComponent },
   { path: 'fichier', component: FichierComponent },
   { path: 'utilisateurs', component: UtilisateursComponent },
+  { path: 'liste', component: ListeComponent },
+
 
 
 ];
