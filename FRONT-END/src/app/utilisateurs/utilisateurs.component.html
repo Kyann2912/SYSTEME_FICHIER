@@ -3,49 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="inscription.component.css">
+    <link rel="stylesheet" href="utilisateurs.component.css">
     <title>SPF-UTA</title>
 </head>
 <body>
     <div class="Tout">
         <div class="image">
             <img src="image/logo.jpeg" alt="">
-             <h1>CRER UN COMPTE 💻</h1>
+            <h1>CRÉER UN COMPTE 💻</h1>
         </div>
 
         <div class="Premier">
             <div>
                 <h3>INSCRIPTION</h3> 
             </div>
-            <form>
+            <form  method="post">
                 <div class="B">
                     Nom  <br>
-                    <input type="text" name="nom"  value="" required=""><br>
+                    <input type="text" name="nom"   required><br>
                     <br>
                     Prénom  <br>
-                    <input type="text" name="prenom" value="" required=""><br>
+                    <input type="text" name="prenom"   required><br>
                     <br>
                     Email  <br>
-                    <input type="mail" name="email" value="" required=""><br>
+                    <input type="email" name="email"    required><br>
                     <br>
                     Adresse  <br>
-                    <input type="text" name="adresse" value="" class="Date" required=""> <br>
+                    <input type="text" name="adresse"     required><br>
                     <br>
                     Contact  <br>
-                    <input type="text" name="contact" value="" required=""><br> 
+                    <input type="text" name="contact"  required><br> 
                     <br>
                     Mot de Passe  <br>
-                    <input type="password" name="mot_passe" value="" required=""> <br>
+                    <input type="password" name="mot_passe"   required><br>
                 </div><br>
                 <div class="C">
-                    <input type="submit" onclick="Yann()" value="Envoyer">
+                    <input type="submit" value="Envoyer">
                 </div>
             </form>
         </div>
-
     </div>
-
-
-    
 </body>
 </html>
+

@@ -18,4 +18,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 }); 
 
-Route :: Post('/utilisateurs/save',[UtilisateursController::class,'store']);
+Route :: Post('/utilisateurs',[UtilisateursController::class,'store']);
