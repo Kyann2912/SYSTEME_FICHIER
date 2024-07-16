@@ -11,7 +11,7 @@
       padding: -10px;
       margin: -10px;
       background-color: rgb(4, 80, 0);
-      width: 300px;
+      width: 350px;
       height: 600px;
     }
     .texte h1{
@@ -22,14 +22,6 @@
       font-size: 30px;
       margin-top: 90px;
     }
-  
-    /* .image{
-      background-image: url('image/logo.jpeg');
-      background-repeat: no-repeat;
-      background-position: center;
-      width: 1000px;
-      margin-left: 20px;
-    } */
     .Z{
       gap: 140px;
       margin-left: 10px;
@@ -103,6 +95,32 @@
         height: 150px;
         /* margin-left: 400px; */
     }
+    .fichier{
+        display: flex;
+        /* gap: 30px; */
+        margin-top: 20px;
+        font-family: sans-serif;
+    }
+    .fichier input{
+        height: 30px;
+        width: 200px;
+        margin-left: 10px;
+        border-radius: 5px;
+    }
+    .fichier a{
+        font-family: sans-serif;
+        font-size: 20px;
+        text-decoration: none;
+        color: white;
+    }
+    .Z a{
+        margin-top: 20px;
+    }
+    .fichier a:hover{
+        color: yellowgreen;
+        border-bottom: 2px solid;
+
+    }
 </style>
   
 <body>
@@ -110,7 +128,10 @@
         <div class="texte">
             <h1>SPF-UTA</h1>
             <br>
-            <h2>TELECHARGER UN FICHIER</h2>
+            <h2>TELECHARGER UN FICHIER</h2><br>
+            <div class="fichier">
+                <input type="search"  placeholder="Id du Fichier"> <a href="" >Télécharger</a>
+            </div>
             <br>
             <h2>MATIERES-UTA </h2>
             <select>
@@ -121,18 +142,18 @@
                 <option value="">PRO FINANCE COMPTABILITE</option>
 
             </select> <br>
+
             <div class="image">
                 <div class="Z">
                    <a routerLink="/connexion">Deconnexion</a> <br>
                    <br>
                 </div>
            </div>
-        </div>
-
+        </div><br>
         <div class="info">
             <table>
                 <caption><strong>LISTE DES  FICHIERS</strong></caption>
-                <tr><th>Id</th><th>Filière</th><th>Niveau</th><th>Chemain</th><th>Option</th></tr>
+                <tr><th>Id</th><th>Filière</th><th>Niveau</th><th>Chemin</th></tr>
             </table>
         </div>
 
