@@ -20,9 +20,9 @@ export class TableauComponent {
             // Rediriger vers la page d'ajout de fichier
             this.router.navigate(['/fichier']);
         }
-        if (selectedOption === 'telecharger') {
+        if (selectedOption === 'liste') {
           // Rediriger vers la page d'ajout de fichier
-          this.router.navigate(['/']);
+          this.router.navigate(['/liste']);
       }
     }
 

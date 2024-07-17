@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\FichierController;
 use App\Http\Controllers\UtilisateursController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,3 +23,5 @@ Route :: Post('/utilisateurs',[UtilisateursController::class,'store']);
 
 
 Route::post('/login',[UtilisateursController::class,'login'] );
+
+Route::post('/fichiers', [FichierController::class, 'store']);
