@@ -1,6 +1,7 @@
 <?php
 use App\Http\Controllers\FichierController;
 use App\Http\Controllers\UtilisateursController;
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route :: Post('/utilisateurs',[UtilisateursController::class,'store']);
 
 
-Route::post('/login',[UtilisateursController::class,'login'] );
 
-Route::post('/fichiers', [FichierController::class, 'store']);
+Route::Post('/fichier', [FichierController::class, 'store']);
+
+Route :: Post('/connexion',[AuthController::class,'login']);
