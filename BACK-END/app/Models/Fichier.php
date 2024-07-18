@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class Fichier extends Model
 {
     use HasFactory;
+    protected $guarded = ['filiere','niveau','chemin'];
+
 }
