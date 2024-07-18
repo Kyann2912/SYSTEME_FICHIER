@@ -20,12 +20,12 @@ class AuthController extends Controller
         if (Auth::attempt($credentials)) {
             // Authentification réussie
 
-            $utilisateur = Auth::user(); // Récupérer l'utilisateur authentifié
+            $utilisateurs = Auth::user(); // Récupérer l'utilisateur authentifié
 
             return response()->json([
                 'message' => 'Connexion réussie',
-                'utilisateur' => $utilisateur,
-                'token' => $utilisateur->createToken('AuthToken')->plainTextToken,
+                'utilisateur' => $utilisateurs,
+                'token' => $utilisateurs->createToken('AuthToken')->plainTextToken,
             ]);
         } else {
             // Authentification échouée
