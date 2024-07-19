@@ -27,3 +27,14 @@ Route :: Post('/utilisateurs',[UtilisateursController::class,'store']);
 Route::Post('/fichier', [FichierController::class, 'store']);
 
 Route :: Post('/deconnexion',[UtilisateursController::class,'deconnexion']);
+
+Route :: Post('/connexion',[UtilisateursController::class,'connexion']);
+
+
+Route::Post('/fichier/liste', [FichierController::class, 'index']);
+
+Route::get('/fichiers/{id}/download', [FichierController::class, 'download']);
+
+
+
+

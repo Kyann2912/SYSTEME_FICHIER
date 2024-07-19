@@ -9,97 +9,67 @@ use Illuminate\Support\Facades\Auth;
 class UtilisateursController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
-        $valider = $request->validate([
-            'nom' => 'required|string|max:255',
-            'prenom'=> 'required|string|max:255',
-            'email' => 'required|email|unique:utilisateurs,email|max:255',
-            'adresse'=> 'required|string|max:255',
-            'contact'=>'required|unique:utilisateurs,contact|max:20',
-            'mot_passe' => 'required|string|min:8'
-        ]);
+        try {
+            // Validation des données de la requête
+            $validated = $request->validate([
+                'nom' => 'required|string|max:255',
+                'prenom' => 'required|string|max:255',
+                'email' => 'required|email|unique:utilisateurs,email|max:255',
+                'adresse' => 'required|string|max:255',
+                'contact' => 'required|unique:utilisateurs,contact|max:20',
+                'mot_passe' => 'required|string|min:8'
+            ]);
 
-        try{
+            // Création d'une instance d'utilisateur
             $utilisateurs = new Utilisateurs();
-            $utilisateurs->nom =$valider['nom'];
-            $utilisateurs->prenom = $valider['prenom'];
-            $utilisateurs->email = $valider['email'];
-            $utilisateurs->adresse = $valider['adresse'];
-            $utilisateurs->contact = $valider['contact'];
-            $utilisateurs->mot_passe = Hash::make($valider['mot_passe']);
+            $utilisateurs->nom = $validated['nom'];
+            $utilisateurs->prenom = $validated['prenom'];
+            $utilisateurs->email = $validated['email'];
+            $utilisateurs->adresse = $validated['adresse'];
+            $utilisateurs->contact = $validated['contact'];
+            $utilisateurs->mot_passe = Hash::make($validated['mot_passe']);
 
-///verifions si l'email et le contact  existe
-            $variable = Utilisateurs::where('email', $valider['email'])->exists();
-            $yann =  Utilisateurs::where('contact', $valider['contact'])->exists();
-            if ($variable){
-                echo "Erreur";
-
-                // return response()->json(["reponse" => "erreur", "message" => "Le contact existe déja."]);
-
-            } elseif($yann){
-                echo "Erreur";
-                // return response()->json(["reponse" => "erreur", "message" => "L'email spécifié existe déjà."]);
+            // Vérification de l'existence de l'email ou du contact
+            if (Utilisateurs::where('email', $validated['email'])->exists()) {
+                throw new \Exception('L\'email spécifié existe déjà.');
             }
+
+            if (Utilisateurs::where('contact', $validated['contact'])->exists()) {
+                throw new \Exception('Le contact existe déjà.');
+            }
+
+            // Sauvegarde de l'utilisateur
             $utilisateurs->save();
-            return response()->json(["reponse"=>"succes","Enregistrement"=>$utilisateurs]);
-        }catch(\Exception $e){
 
-            return response()->json(["reponse" => "Inscription echouer", "Cause" => $e->getMessage()]);
-
+            // Réponse JSON en cas de succès
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Enregistrement réussi',
+                'utilisateur' => $utilisateurs
+            ], 201); // Code HTTP 201: Created
+        } catch (\Exception $e) {
+            // En cas d'erreur, retourner une réponse d'erreur JSON
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Échec de l\'enregistrement',
+                'error' => $e->getMessage()
+            ], 400); // Code HTTP 400: Bad Request
         }
-
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
+     * Log out the authenticated user.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        
-        //
-    }
     public function deconnexion(Request $request)
     {
         try {
@@ -118,7 +88,48 @@ class UtilisateursController extends Controller
             return response()->json(['message' => 'Échec de la déconnexion', 'error' => $e->getMessage()]);
         }
     }
-    
 
+    /**
+     * Handle user login.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function connexion(Request $request)
+    {
+        // Validation des données de la requête
+        $credentials = $request->validate([
+            'email' => 'required|email|max:255',
+            'mot_passe' => 'required|string|min:8'
+        ]);
 
+        try {
+            // Tentative d'authentification de l'utilisateur
+            if (Auth::attempt($credentials)) {
+                $utilisateurs = Auth::utilisateurs();
+                $token = $utilisateurs->createToken('AuthToken')->plainTextToken;
+
+                // Réponse JSON en cas de succès
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Connexion réussie',
+                    'user' => $utilisateurs,
+                    'token' => $token
+                ]);
+            } else {
+                // Réponse JSON si les informations d'identification sont incorrectes
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Informations d\'identification invalides'
+                ], 401); // Code HTTP 401: Unauthorized
+            }
+        } catch (\Exception $e) {
+            // En cas d'erreur, retourner une réponse d'erreur JSON
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Connexion échouée',
+                'error' => $e->getMessage()
+            ], 400); // Code HTTP 400: Bad Request
+        }
+    }
 }
