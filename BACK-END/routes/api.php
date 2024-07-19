@@ -35,6 +35,8 @@ Route::Post('/fichier/liste', [FichierController::class, 'index']);
 
 Route::get('/fichiers/{id}/download', [FichierController::class, 'download']);
 
+Route :: Post('/login',[UtilisateursController::class, 'login']);
+
 
 
 
