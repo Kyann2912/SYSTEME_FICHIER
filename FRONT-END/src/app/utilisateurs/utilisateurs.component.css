@@ -87,6 +87,9 @@ img{
     height: 500px;
     margin: 0px;
 }
+.C input:hover{
+    background-color: white;
+}
 
 .Tout{
     display: flex;

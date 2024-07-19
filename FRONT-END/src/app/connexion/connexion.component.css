@@ -83,6 +83,9 @@ div button{
     cursor: pointer;
   
 }
+.C input:hover{
+    background-color: white;
+}
 img{
     width: 500px;
     height: 500px;
