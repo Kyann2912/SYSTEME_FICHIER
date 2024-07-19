@@ -29,6 +29,8 @@ class FichierController extends Controller
             return response()->json(['message' => 'Erreur lors de l\'enregistrement du fichier', 'error' => $e->getMessage()], 500);
         }
     }
+
+    
     
     //
 }

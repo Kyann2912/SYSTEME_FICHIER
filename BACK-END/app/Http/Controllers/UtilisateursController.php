@@ -97,8 +97,28 @@ class UtilisateursController extends Controller
      */
     public function destroy($id)
     {
+        
         //
     }
+    public function deconnexion(Request $request)
+    {
+        try {
+            // Récupérer l'utilisateur authentifié
+            $utilisateurs = Auth::user();
+
+            if ($utilisateurs) {
+                // Révoquer le jeton d'authentification de l'utilisateur
+                $utilisateurs->tokens()->where('id', $utilisateurs->currentAccessToken()->id)->delete();
+            }
+
+            // Déconnexion réussie, retourner une réponse JSON
+            return response()->json(['message' => 'Déconnexion réussie']);
+        } catch (\Exception $e) {
+            // En cas d'erreur, retourner un message d'erreur
+            return response()->json(['message' => 'Échec de la déconnexion', 'error' => $e->getMessage()]);
+        }
+    }
+    
 
 
 }

@@ -26,4 +26,4 @@ Route :: Post('/utilisateurs',[UtilisateursController::class,'store']);
 
 Route::Post('/fichier', [FichierController::class, 'store']);
 
-Route :: Post('/connexion',[AuthController::class,'login']);
+Route :: Post('/deconnexion',[UtilisateursController::class,'deconnexion']);
